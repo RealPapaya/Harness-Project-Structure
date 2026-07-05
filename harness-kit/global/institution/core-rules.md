@@ -55,6 +55,9 @@ Never copy rules from here into them; reference by path instead.
    a machine/tooling gotcha, goes to `lessons.md` (format: maintenance.md §2)
    in the same session it happened. Project-only lessons go to that project's own
    memory/instruction file, with a pointer if broadly useful.
+   Wins count too: an approach confirmed to work well is recorded in the same
+   places, same format. Every time you write a lesson/memory entry (trap or win),
+   tell the user in your reply: what was recorded, and in which file.
 
 10. **Index discipline.** If you are about to add a rule to CLAUDE.md / AGENTS.md /
     SOUL.md — stop. Rules live here. Add it to the right institution file and, if

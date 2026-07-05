@@ -21,6 +21,12 @@ ASK THE USER first:
 Always: before modifying an EXISTING file here or an index file, copy it to
 `<name>.bak-YYYYMMDD` in the same directory first.
 
+Backup retention: backups are session-scoped, not archives. Before the session
+ends, once the change has passed read-back verification and the user has raised
+no objection, DELETE the backups you created. Never leave `.bak-*` files
+accumulating. If a session ends with the change still in doubt, keep the backup
+and tell the user why it was kept.
+
 ## 2. Lesson write-back (all three harnesses → one file)
 Machine-global lessons (tooling gotchas, cross-project workflow fixes, model
 behavior discoveries) go to `lessons.md`, appended in this format:
@@ -32,6 +38,10 @@ behavior discoveries) go to `lessons.md`, appended in this format:
 - How to apply: <literal instruction a weak model can follow>
 - Origin: <harness, date, project>
 ```
+
+Wins (confirmed-effective practices) use the same format — "Why it matters"
+states the benefit instead of the cost. After appending any entry (trap or
+win), tell the user what was recorded and where (core-rules §1.9).
 
 Harness-specific routing:
 - **Claude Code**: auto-memory also writes to `~/.claude/projects/<slug>/memory/`.

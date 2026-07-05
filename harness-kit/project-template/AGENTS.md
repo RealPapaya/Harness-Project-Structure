@@ -18,8 +18,9 @@ Everything below is project-specific and adds to (never overrides) those rules.
    BEFORE implementation. The author never green-lights their own plan.
 4. **Before claiming done**: institution judgment.md §Done — evidence, verified
    by someone other than the writer (dispatch.md §5).
-5. **After any mistake or surprise**: append it to `LESSONS.md` NOW (format
-   inside), in the same session. Machine-global lessons also go to
+5. **After any mistake, surprise, or confirmed win**: append it to `LESSONS.md`
+   NOW (format inside), in the same session, and tell the user what was
+   recorded. Machine-global lessons also go to
    `{{HOME}}\.agents\institution\lessons.md`.
 
 ## Project specifics (fill in; keep each line true or delete it)

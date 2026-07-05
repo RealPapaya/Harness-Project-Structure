@@ -1,6 +1,6 @@
-# Project Lessons — read before working, write when burned
-<!-- 中文摘要：本專案的教訓帳本。每個 session 開工前必讀；踩雷當場追加。
-     這是「複利」的載體：同一個錯，第二次犯就是制度失敗。 -->
+# Project Lessons — read before working, write when burned (or when it works)
+<!-- 中文摘要：本專案的教訓帳本。每個 session 開工前必讀；踩雷當場追加，
+     驗證有效的好做法也記。這是「複利」的載體：同一個錯，第二次犯就是制度失敗。 -->
 
 Append new lessons at the TOP (newest first) in this exact format:
 
@@ -10,6 +10,10 @@ Append new lessons at the TOP (newest first) in this exact format:
 - Cost: <what it broke / time lost>
 - Rule: <literal instruction that prevents it — a weak model must be able to follow it>
 ```
+
+Wins (approaches confirmed to work well in this repo) use the same format with
+`Win:` / `Benefit:` / `Rule:` lines instead. After appending any entry (trap
+or win), tell the user what was recorded and where (core-rules §1.9).
 
 Housekeeping: when this file exceeds ~150 lines, merge duplicates and delete
 entries obsoleted by code changes (verify obsolescence before deleting).
