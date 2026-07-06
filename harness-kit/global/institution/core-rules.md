@@ -74,6 +74,8 @@ Never copy rules from here into them; reference by path instead.
 
 How to dispatch on each harness:
 - Claude Code: Agent tool with explicit `model:` (haiku/sonnet/opus). Never omit model.
+- Claude Code Workflow tool: treat every `agent()` like Agent-tool dispatch; pass
+  `model`/`effort` explicitly so cheap fan-out never inherits a top-tier session.
 - Codex: subagents exist (`multi_agent` flag stable/true) but the reliable, verified
   path is a separate low-cost session: `codex exec -m gpt-5.4-mini "<task brief>"`.
 - Hermes: `delegate_task` (max 3 concurrent, depth 1) or a separate session.

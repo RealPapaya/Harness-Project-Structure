@@ -27,6 +27,14 @@ A brief missing any part is not ready to send.
 - Effort: `/effort` per session; default medium. Subagents inherit unless overridden.
 - Cheap tier is for: repo scans, multi-file reads, log digestion, batch mechanical
   edits, read-back verification. Mid tier: implementation. Top: ladder only (§4).
+- **Workflow tool** (multi-agent orchestration script): the SAME tiering applies
+  per `agent()` call -- pass `model` / `effort` explicitly on each. Cheap mechanical
+  stages (scan, batch-transform, read-back) -- `model:'haiku'`/`effort:'low'`;
+  implementation stages -- mid (omit `model` to inherit session); only the hardest
+  verify/judge/synthesis stages get top tier. Omitting `model` inherits the session
+  model (often top) -- do NOT let simple fan-out stages silently run on the top tier.
+  Only author a Workflow when the user explicitly opts in (keyword/ultracode/"use a
+  workflow"); otherwise use the Agent tool.
 
 ### Codex CLI (0.142.5)
 - Models: `gpt-5.5` (top) · `gpt-5.4` (mid) · `gpt-5.4-mini` (cheap). Set with `-m`.

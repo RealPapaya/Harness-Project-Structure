@@ -2,9 +2,9 @@
 <!-- 中文摘要：共用正本的目錄地圖。三個 harness 的薄索引都路由到這裡。
      Last updated 行由每次修改正本的 session 更新。 -->
 
-Last updated: 2026-07-06 (backup policy is Git-aware: tracked files use Git
-diff/status; untracked/non-Git files get session-scoped `.bak-*` files;
-see maintenance.md section 1)
+Last updated: 2026-07-06 (dispatch.md §2 now covers the Workflow tool: same
+cheap/mid/top tiering per `agent()` call, pass model/effort explicitly, do not let
+simple fan-out stages silently run on the top tier)
 
 This directory is the single source of truth for how AI agents work for Morris
 across Claude Code, Codex CLI, and Hermes. Harness instruction files are thin
