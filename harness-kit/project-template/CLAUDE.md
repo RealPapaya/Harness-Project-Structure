@@ -3,6 +3,7 @@
 
 Read `AGENTS.md` in this directory — it is this project's single instruction
 source (session protocol, build/test commands, module conventions, LESSONS.md).
-Global rules load via `~\.claude\CLAUDE.md` as usual.
+Global rules load via `~\.claude\CLAUDE.md` as usual. If that file was not read
+yet, read it before continuing.
 
 Do not add rules here; add them to AGENTS.md (project) or the institution (global).

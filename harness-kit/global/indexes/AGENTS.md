@@ -14,6 +14,9 @@ instruction/memory files).
 - Model tiers live in core-rules.md §2 (verify with `codex features` /
   models cache on THIS machine before trusting them — they may differ per
   machine/date).
+- Multi-agent hard stop: do not spawn subagents unless the user explicitly asks
+  for subagents, delegation, or parallel agent work. If spawning is authorized,
+  show the agent plan table (task / model / effort / reason) before running.
 - Cheap delegation: `codex exec -m <cheap model> "<task brief>"` in a separate
   session. Task briefs use templates.md forms.
 - COST WARNING: if config.toml pins an expensive default model or high

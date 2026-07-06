@@ -14,6 +14,11 @@ instruction/memory files).
 - Subagents: use the Agent tool and ALWAYS pass `model:` explicitly —
   `haiku` for search/bulk-read/batch, `sonnet` for implementation (default),
   `opus` only via the escalation ladder in dispatch.md.
+- Dynamic Workflow hard stop: before any Dynamic Workflow run, show the agent plan table
+  (task / model / effort / reason) and wait for user approval. Do not run if
+  any `agent()` omits model or effort. Do not use `opus` / 4.8 for search,
+  bulk-read, batch edits, or read-back verification unless the user explicitly
+  approves that specific agent.
 - Effort: if high effort is the saved default, run `/effort medium` at session
   start; raise only for genuinely hard tasks (diagnosis.md C3).
 - Memory: this harness auto-keeps per-project memory in

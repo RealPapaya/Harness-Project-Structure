@@ -4,6 +4,7 @@
 
 Global rules: read `{{HOME}}\.agents\institution\core-rules.md` first.
 Everything below is project-specific and adds to (never overrides) those rules.
+If a harness-level global index was not read yet, read it before continuing.
 
 ## Session protocol (fixed — do not edit)
 1. **Before any work**: read `LESSONS.md` in this directory. It contains this
