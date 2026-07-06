@@ -14,8 +14,10 @@ paths shown; on Unix use `~/.agents/institution/` etc. with forward slashes.
 
 ## Step 1 — copy the institution
 Copy `<KIT>\global\institution\*` (10 .md files) to `<HOME>\.agents\institution\`
-(create the directory). If the target already has files, back the whole target
-directory up first (`institution.bak-YYYYMMDD`), then overwrite — the kit is
+(create the directory). If the target already has files, apply the Git-aware
+backup rule from maintenance.md section 1: skip `.bak` only when every
+existing target file is Git-tracked; otherwise back the whole target
+directory up first (`institution.bak-YYYYMMDD`). Then overwrite; the kit is
 the master.
 
 ## Step 2 — replace the placeholders
@@ -35,13 +37,15 @@ core-rules.md shows real paths.
 Templates are in `<KIT>\global\indexes\`.
 1. **Claude Code**: target `<HOME>\.claude\CLAUDE.md`.
    - Target missing → copy the template in.
-   - Target exists → back it up, then put the template's routing block at the
-     TOP and keep any user content below it. Result must stay ≤150 lines.
+   - Target exists: apply the Git-aware backup rule from maintenance.md
+     section 1, then put the template's routing block at the TOP and keep
+     any user content below it. Result must stay <=50 lines.
 2. **Codex CLI**: target `<HOME>\.codex\AGENTS.md`. Same rules as above.
 3. **Hermes** (skip if Hermes is not installed): find SOUL.md — check
    `<HOME>\AppData\Local\hermes\SOUL.md` (Windows) or `<HOME>\.hermes\SOUL.md`.
-   Back it up, then APPEND the contents of `<KIT>\global\indexes\SOUL-block.md`
-   to the end. Never touch the persona text above the block.
+   Apply the Git-aware backup rule from maintenance.md section 1, then APPEND
+   the contents of `<KIT>\global\indexes\SOUL-block.md` to the end. Never
+   touch the persona text above the block.
 4. **Placeholders**: apply the Step-2 replacement (`{{HOME}}`, `{{KIT}}`) to
    every index file you just installed/modified. This step is mandatory.
 
@@ -60,6 +64,7 @@ Templates are in `<KIT>\global\indexes\`.
    `## install-<YYYYMMDD>` + What/verification results, per maintenance.md §2.
 
 ## Report
-Return: list of files created/modified (absolute paths), backup paths, the
-three verification results, and anything skipped — per the report contract
+Return: list of files created/modified (absolute paths), backup paths or
+Git-protected/no-backup notes, the three verification results, and anything
+skipped per the report contract
 (conclusions only, no file dumps).

@@ -2,8 +2,9 @@
 <!-- 中文摘要：共用正本的目錄地圖。三個 harness 的薄索引都路由到這裡。
      Last updated 行由每次修改正本的 session 更新。 -->
 
-Last updated: 2026-07-05 (Fable 5; lessons loop records wins + notifies user on
-every write; backups are session-scoped, deleted after verification — maintenance §1/§2)
+Last updated: 2026-07-06 (backup policy is Git-aware: tracked files use Git
+diff/status; untracked/non-Git files get session-scoped `.bak-*` files;
+see maintenance.md section 1)
 
 This directory is the single source of truth for how AI agents work for Morris
 across Claude Code, Codex CLI, and Hermes. Harness instruction files are thin

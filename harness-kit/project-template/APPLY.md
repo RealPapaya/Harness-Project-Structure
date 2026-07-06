@@ -16,8 +16,11 @@ file-Edit tool, never PowerShell `Get-Content | Set-Content` (corrupts non-ASCII
    shared/core files; pick two representative source files as style anchors).
    A slot you cannot determine: write `待使用者填寫`, never guess.
 
-## Case B — project already has CLAUDE.md (and maybe AGENTS.md)
-1. Back up every file you will touch: `<name>.bak-YYYYMMDD` in place.
+## Case B - project already has CLAUDE.md (and maybe AGENTS.md)
+1. For every existing file you will touch, apply the Git-aware backup rule
+   from global `maintenance.md` section 1: skip `.bak` only when Git can
+   restore the tracked file; back up untracked/ignored/non-Git files as
+   `<name>.bak-YYYYMMDD` in place.
 2. Install `LESSONS.md` from the template (skip if one already exists).
 3. AGENTS.md:
    - If missing: copy the template AGENTS.md in, fill its slots using the
@@ -41,5 +44,6 @@ file-Edit tool, never PowerShell `Get-Content | Set-Content` (corrupts non-ASCII
    (Test-Path each).
 2. Run the project's test command from AGENTS.md once. If it fails on a clean
    checkout, record that in LESSONS.md (first lesson!) rather than "fixing" it.
-3. Report per the contract: files changed with backup paths, slots left as
-   待使用者填寫, test-command result. No file dumps.
+3. Report per the contract: files changed with backup paths or
+   Git-protected/no-backup notes, unresolved slots, and test-command result.
+   No file dumps.

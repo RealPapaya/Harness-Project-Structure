@@ -18,12 +18,22 @@ ASK THE USER first:
 - Deleting or rewriting (not appending) any institution file.
 - Anything in judgment.md / dispatch.md that changes a threshold or a tier.
 
-Always: before modifying an EXISTING file here or an index file, copy it to
-`<name>.bak-YYYYMMDD` in the same directory first.
+Always: before modifying an EXISTING instruction/memory/index file, decide
+whether Git can restore it.
+- If the file is inside a Git worktree AND the existing file is tracked
+  (`git -C <repo> ls-files --error-unmatch -- <relative-file>` succeeds), do
+  NOT create a `.bak`; rely on Git status/diff and report that it was
+  Git-protected.
+- If there is no Git worktree, or the existing file is untracked/ignored, copy
+  it to `<name>.bak-YYYYMMDD` in the same directory before editing.
+- New files need no backup.
 
-Backup retention: backups are session-scoped, not archives. Before the session
-ends, once the change has passed read-back verification and the user has raised
-no objection, DELETE the backups you created. Never leave `.bak-*` files
+Directory overwrites follow the same rule: skip backup only when every existing
+file being replaced is Git-tracked; otherwise back up the directory first.
+
+Backup retention: `.bak-*` files are session-scoped, not archives. Before the
+session ends, once the change has passed read-back verification and the user has
+raised no objection, DELETE the backups you created. Never leave `.bak-*` files
 accumulating. If a session ends with the change still in doubt, keep the backup
 and tell the user why it was kept.
 
