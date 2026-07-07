@@ -2,9 +2,9 @@
 <!-- 中文摘要：共用正本的目錄地圖。三個 harness 的薄索引都路由到這裡。
      Last updated 行由每次修改正本的 session 更新。 -->
 
-Last updated: 2026-07-06 (dispatch.md §2 now covers the Workflow tool: same
-cheap/mid/top tiering per `agent()` call, pass model/effort explicitly, do not let
-simple fan-out stages silently run on the top tier)
+Last updated: 2026-07-07 (added planning-playbook.md — the project-agnostic
+decision-maker loop for turning a request into a buildable plan; its worked
+instances are the PLAN files each project keeps in its own repo)
 
 This directory is the single source of truth for how AI agents work for Morris
 across Claude Code, Codex CLI, and Hermes. Harness instruction files are thin
@@ -18,6 +18,7 @@ drift — fix per maintenance.md §4 (Anti-drift checks).
 | File | Read when… |
 |---|---|
 | `coding-rules.md` | you are about to write, modify, or review code, or approve a plan |
+| `planning-playbook.md` | you are planning a new feature, or the task's shape is unknown — the P1–P7 decision loop |
 | `dispatch.md` | you are about to delegate work, pick a model, or escalate/downgrade |
 | `judgment.md` | you are about to claim done, escalate, retry, or ask the user |
 | `templates.md` | you are writing a task brief for another model/session |

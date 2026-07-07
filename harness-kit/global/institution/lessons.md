@@ -37,8 +37,8 @@
 - Origin: Claude Code, 2026-06, TWCARDGAME (promoted from project memory).
 
 ## install-20260707
-- What: Re-synced the deployed institution at C:\Users\Morris\.agents\institution\
-  from the harness-kit master (D:\Google AI\Harness Project Structure\harness-kit).
+- What: Re-synced the deployed institution at {{HOME}}\.agents\institution\
+  from the harness-kit master ({{KIT}}).
   Kit was newer on 4 files: core-rules.md + dispatch.md (Workflow-tool tiering),
   INDEX.md (Last-updated 2026-07-06), maintenance.md (Git-aware backup rule).
   Merged the two thin indexes: added the Dynamic-Workflow / Multi-agent hard-stop
@@ -52,3 +52,17 @@
   (no CJK corruption); 3 indexes route to .agents\institution with no placeholders.
   Codex load test run separately.
 - Origin: Claude Code, 2026-07-07, Harness Project Structure.
+
+## codex-exec-background-stdin-hang
+- What: `codex exec` launched from a non-tty context (backgrounded task) prints
+  "Reading additional input from stdin..." and hangs until timeout waiting for
+  stdin EOF. Two adjacent traps: PowerShell 5.1 breaks native-exe args that
+  contain embedded double quotes (splits into multiple args), and `--%` is not
+  accepted by codex's arg parser.
+- Why it matters: a cross-family T5 review silently stalls for the full timeout
+  and burns the review round.
+- How to apply: build the brief as a single-quoted here-string with NO embedded
+  double quotes, then pipe it via stdin with the `-` argument:
+  `$brief | codex exec -m gpt-5.4 -C <workdir> -`
+- Origin: Claude Code, 2026-07-07, Harness Project Structure (T5 review of the
+  vizcode-harness-scan example plan).
