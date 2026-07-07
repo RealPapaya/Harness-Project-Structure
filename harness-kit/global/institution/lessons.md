@@ -35,3 +35,20 @@
   long output (e.g. `| Select-Object -Last 40`). Treat disagreements as findings
   to resolve, not noise.
 - Origin: Claude Code, 2026-06, TWCARDGAME (promoted from project memory).
+
+## install-20260707
+- What: Re-synced the deployed institution at C:\Users\Morris\.agents\institution\
+  from the harness-kit master (D:\Google AI\Harness Project Structure\harness-kit).
+  Kit was newer on 4 files: core-rules.md + dispatch.md (Workflow-tool tiering),
+  INDEX.md (Last-updated 2026-07-06), maintenance.md (Git-aware backup rule).
+  Merged the two thin indexes: added the Dynamic-Workflow / Multi-agent hard-stop
+  rules from the kit while preserving this machine's specific facts (Codex model
+  ids gpt-5.5/5.4/5.4-mini, config.toml defaults, sandbox note; Claude effort note).
+  SOUL.md already carried a customized routing block -> left untouched.
+- Why it matters: keeps all three harnesses loading the current canon; the merge
+  pattern avoids clobbering machine-specific facts the portable kit template cannot hold.
+- Verification: 0 placeholders remaining; all 4 updated institution files byte-match
+  the kit (placeholders substituted); all 10 files retain the 中文摘要 header
+  (no CJK corruption); 3 indexes route to .agents\institution with no placeholders.
+  Codex load test run separately.
+- Origin: Claude Code, 2026-07-07, Harness Project Structure.
