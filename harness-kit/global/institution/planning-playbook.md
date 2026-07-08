@@ -1,6 +1,6 @@
 # Planning Playbook — how a decision-maker turns a request into a buildable plan
-<!-- 中文摘要：終局決策者的思考迴路。coding-rules 管「怎麼寫 code」，這份管「code 還不存在之前，
-     計畫怎麼被做出來」：偵察找錨點 → 先定資料合約 → 證據導向評分 → step→verify → 跨家族外審 →
+<!-- 中文摘要：終局決策者的思考迴路。coding-rules 管「怎麼寫 code」，這份管「code 之前與之上」：
+     偵察找錨點 → 先定資料合約 → 證據導向評分 → step→verify → 跨家族外審 → 切片派工執行 →
      留下可複製軌跡。規劃新功能、或任務形狀未知時必讀。本檔永遠專案無關；
      實例＝各專案 repo 裡由 P7 留下的 PLAN 檔，不進正本。 -->
 
@@ -32,6 +32,11 @@ seeing the original prompt.
    an anchor turns "design a system" into "instantiate a proven wiring".
 3. Trace the anchor end-to-end and record the chain as `path:line`:
    producer module → data contract/schema → consumer → registration point.
+   For a USER-FACING surface the anchor has a second layer: the interaction
+   idioms of the best sibling surface — shared component classes, click-through
+   targets, hover/tooltip affordances, sizing and truncation behavior, empty
+   states. A surface with correct plumbing but its own visual language is
+   still an anchor failure; users judge parity, not wiring.
 4. Record the binding constraints you found: dependency policy, style anchors,
    which shared files accept only injection lines, test entry points.
 Exit: you can name the anchor and its full wiring chain with `path:line`.
@@ -74,6 +79,10 @@ The plan file must contain:
   get one-line registrations).
 - Steps as `step → verify:` pairs where verify is a runnable command or an
   observable check (coding-rules §6). A step you cannot verify is not a step.
+- Any new UI surface gets a PARITY verify step: view it side-by-side with its
+  anchor sibling — same component vocabulary, no labels truncated to fragments,
+  every affordance the sibling offers (click, hover, tooltip, drill-down)
+  present or consciously waived in the plan. "It renders" is not this check.
 - Risks with mitigations, one line each.
 Exit: someone else could implement the plan without asking you anything.
 
@@ -86,9 +95,32 @@ Exit: someone else could implement the plan without asking you anything.
   same session, plan file kept in the repo. The kept plan is the next feature's
   pattern anchor — that is how quality compounds.
 
+## P8. Execute by dispatch — the planner does not implement
+The session that owns the plan (the commander) does not write the code; it
+slices, dispatches, and integrates (dispatch.md §0). Mechanics:
+- Slice the file-touch table into work packages with DISJOINT file sets;
+  disjoint packages run in parallel with zero coordination. Each brief lists
+  the exact files the delegate owns and forbids touching anything else.
+- A brief is self-contained (templates.md T2): plan path + which steps are its
+  slice, the rule-stack and style-anchor paths to READ FIRST, acceptance
+  criteria as runnable commands, report format. The delegate starts from zero.
+- Carry the review log into the briefs: each brief names the R# resolutions
+  that bind its slice. A finding that is not in a brief will be re-introduced.
+- Verification is a SEPARATE fresh cheap-tier agent that re-runs every
+  acceptance check and the calibration targets. Implementer self-reports are
+  claims, not evidence (judgment.md §Done).
+- Never trust an implementer's "that failure is pre-existing": the verifier
+  reads the actual error text, greps it for the new feature's identifiers, and
+  checks the working tree before ruling PRE-EXISTING vs RELATED.
+- Escalate only per dispatch.md §4. When done, append an implementation log
+  (who built what, verification evidence, observed calibration numbers) to the
+  kept plan file — completing the P7 trail.
+
 ## Anti-patterns (each voids the phase it belongs to)
 ✘ Designing the feature, then skimming the codebase for confirmation (P2 backwards).
 ✘ A score whose breakdown cannot point to the files that caused it (P4).
 ✘ "I also added X while I was there" — ambition leaked into the diff (P5).
 ✘ A plan step like "wire it up" with no verify command (P6).
+✘ A UI surface that reuses the data wiring but not the siblings' interaction
+  idioms — consistent plumbing, alien surface (P2/P6).
 ✘ Approving your own plan because the review feels like ceremony (P7).

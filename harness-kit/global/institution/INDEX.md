@@ -18,7 +18,7 @@ drift — fix per maintenance.md §4 (Anti-drift checks).
 | File | Read when… |
 |---|---|
 | `coding-rules.md` | you are about to write, modify, or review code, or approve a plan |
-| `planning-playbook.md` | you are planning a new feature, or the task's shape is unknown — the P1–P7 decision loop |
+| `planning-playbook.md` | you are planning a new feature, or the task's shape is unknown — the P1–P8 decision loop |
 | `dispatch.md` | you are about to delegate work, pick a model, or escalate/downgrade |
 | `judgment.md` | you are about to claim done, escalate, retry, or ask the user |
 | `templates.md` | you are writing a task brief for another model/session |
