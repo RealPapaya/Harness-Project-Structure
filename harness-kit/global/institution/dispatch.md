@@ -19,7 +19,7 @@ Use the fill-in forms in templates.md. Every brief contains:
    artifacts written to disk with the path returned; length cap).
 A brief missing any part is not ready to send.
 
-## 2. Per-harness dispatch (verified 2026-07-05)
+## 2. Per-harness dispatch (verified 2026-07-10)
 
 ### Claude Code
 - Mechanism: Agent tool, parallel calls allowed. ALWAYS set `model:` explicitly.
@@ -36,17 +36,23 @@ A brief missing any part is not ready to send.
   Only author a Workflow when the user explicitly opts in (keyword/ultracode/"use a
   workflow"); otherwise use the Agent tool.
 
-### Codex CLI (0.142.5)
-- Models: `gpt-5.5` (top) · `gpt-5.4` (mid) · `gpt-5.4-mini` (cheap). Set with `-m`.
-  Config default is `gpt-5.5` — ALWAYS pass `-m` explicitly (diagnosis.md X3).
-- Reasoning effort: `-c model_reasoning_effort="low|medium|high"`
-  (global config is `high`, and `plan_mode_reasoning_effort` is also `high`;
-  `high` is the only value verified on this install — others are documented
-  convention, 未實測).
+### Codex CLI (0.144.1)
+- Models on this install: locally enabled GPT-5.6 variants (commander/top; exact
+  slug selected by config) · `gpt-5.5` (worker for both cheap and mid tiers).
+  GPT-5.4 variants are retired from this institution. Set the worker model with
+  `-m` and the tier within GPT-5.5 by effort.
+- Config pins a GPT-5.6 variant at high effort (currently `gpt-5.6-terra`; re-read
+  config before reporting the exact slug). Keep it for the user-facing
+  commander and hard synthesis; ALWAYS pass `-m gpt-5.5` for worker sessions
+  so routine work does not inherit the top model (diagnosis.md X3).
+- Reasoning effort: `-c model_reasoning_effort="low|medium|high"` (supported by
+  current model docs; global config and plan-mode effort are both `high`).
+- Effort mapping: cheap = `gpt-5.5` + low; mid = `gpt-5.5` + medium/high;
+  top = config-selected GPT-5.6 + high. Raise effort before changing models.
 - Subagents: `multi_agent` feature flag is stable/true, but the invocation surface
-  is 未實測. The RELIABLE pattern is a separate low-cost session:
-  `codex exec -m gpt-5.4-mini "<paste the full task brief>"`.
-  `codex exec` is non-interactive: the brief must be fully self-contained
+  is 未實測. The RELIABLE pattern is a separate worker session:
+  `codex.cmd exec -m gpt-5.5 -c model_reasoning_effort="low" "<paste the full task brief>"`.
+  `codex.cmd exec` is non-interactive: the brief must be fully self-contained
   (include absolute paths; the delegate cannot ask questions).
 - No memory (diagnosis.md X1): the brief must contain all context; the report
   must be written to a file if the commander session needs it later.
@@ -68,8 +74,10 @@ A brief missing any part is not ready to send.
 
 ## 4. Escalation / downgrade ladder
 - **Cheap fails once** on a subtask → retry once on the MID tier with the failure
-  attached (what was tried, exact error text).
-- **Mid fails the SAME subtask twice** → escalate to TOP tier, attaching the full
+  attached (what was tried, exact error text). In Codex this normally keeps
+  `gpt-5.5` and raises effort from low to medium/high.
+- **Mid fails the SAME subtask twice** → escalate to TOP tier (the config-selected
+  GPT-5.6 variant in Codex), attaching the full
   failure trail: every attempt, every error, current hypothesis. Never escalate
   with just "it didn't work".
 - **Top tier solves it** → extract the pattern (what the fix looks like) and
@@ -92,13 +100,15 @@ A brief missing any part is not ready to send.
   without per-criterion answers is void — redo it.
 
 ## 6. Cross-harness division of labor
-- **Claude Code** — primary dev harness: real subagent fleet with per-call model
-  choice, skills, MCP, per-project memory. Default home for multi-step work.
-- **Codex CLI** — (a) independent second opinions on plans/diffs (different model
-  family = real diversity; keep prompts in English, pipe long output through
-  filters — see lessons.md #cross-validate); (b) cheap non-interactive batch via
-  `codex exec -m gpt-5.4-mini`; (c) its sandbox (workspace-write) suits contained
-  command experiments.
+- **Codex CLI** — primary workflow: the configured GPT-5.6 variant commands,
+  decomposes, and
+  integrates; `gpt-5.5` executes scans, implementation, batch work, and routine
+  verification. Its sandbox (workspace-write) suits contained experiments.
+- **Claude Code** — independent adversarial reviewer for GPT-produced plans,
+  diffs, instruction changes, and high-stakes conclusions. Ask it to find flaws,
+  require severity + evidence + concrete fixes, and resolve disagreements before
+  shipping. In a Claude-led session, reverse the direction and use Codex for the
+  independent GPT-family review (lessons.md #cross-validate-with-codex).
 - **Hermes** — rarely used. Niche strengths if ever needed: messaging-platform
   integrations, cron jobs, multi-provider model access. Keep its footprint thin;
   do not build workflows that depend on it.

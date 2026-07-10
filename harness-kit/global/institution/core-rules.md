@@ -64,20 +64,22 @@ Never copy rules from here into them; reference by path instead.
     routing is needed, add one pointer line to the index. maintenance.md says which
     files you may edit without asking.
 
-## 2. Quick dispatch table (verified 2026-07-05 — details in dispatch.md)
+## 2. Quick dispatch table (verified 2026-07-10 — details in dispatch.md)
 
 | Tier | Claude Code | Codex CLI | Hermes |
 |---|---|---|---|
-| cheap (search, bulk read, batch apply) | haiku (`haiku-4-5`) | `gpt-5.4-mini` | 待使用者填寫 (non-Claude via OpenRouter) |
-| mid (default: implement, refactor) | sonnet (`sonnet-4-6`) | `gpt-5.4` | same as cheap until user fills tier |
-| top (escalation only) | opus (`opus-4-8`) | `gpt-5.5` | `anthropic/claude-opus-4.6` (paid per token — ladder only) |
+| cheap (search, bulk read, batch apply) | haiku (`haiku-4-5`) | `gpt-5.5` + low effort | 待使用者填寫 (non-Claude via OpenRouter) |
+| mid (default: implement, refactor) | sonnet (`sonnet-4-6`) | `gpt-5.5` + medium/high effort | same as cheap until user fills tier |
+| top (commander, hard synthesis, escalation) | opus (`opus-4-8`) | GPT-5.6 (config-selected local slug) + high effort | `anthropic/claude-opus-4.6` (paid per token — ladder only) |
 
 How to dispatch on each harness:
 - Claude Code: Agent tool with explicit `model:` (haiku/sonnet/opus). Never omit model.
 - Claude Code Workflow tool: treat every `agent()` like Agent-tool dispatch; pass
   `model`/`effort` explicitly so cheap fan-out never inherits a top-tier session.
-- Codex: subagents exist (`multi_agent` flag stable/true) but the reliable, verified
-  path is a separate low-cost session: `codex exec -m gpt-5.4-mini "<task brief>"`.
+- Codex: the config-selected GPT-5.6 variant is commander; `gpt-5.5` is worker.
+  Subagents exist
+  (`multi_agent` flag stable/true), but the reliable path is a separate session:
+  `codex.cmd exec -m gpt-5.5 -c model_reasoning_effort="low" "<task brief>"`.
 - Hermes: `delegate_task` (max 3 concurrent, depth 1) or a separate session.
 
 ## 3. Machine facts (this Windows PC)
@@ -87,8 +89,9 @@ How to dispatch on each harness:
   CJK characters. Use the harness's Edit tool.
   (lessons.md #powershell-utf8-roundtrip-corrupts-cjk)
 - Generated `.bat` files must be CRLF + ASCII. (lessons.md #bat-file-crlf-gotcha)
-- Cross-model review: Codex CLI is at `codex.cmd`; use it for independent second
-  opinions on plans/diffs. Keep prompts to it in English.
+- Cross-model review: use Claude for adversarial review of GPT-produced plans/diffs;
+  use Codex (`codex.cmd`) for GPT-family review of Claude-produced work. Keep
+  cross-harness prompts in English.
   (lessons.md #cross-validate-with-codex)
 
 ## 4. File map (read on demand, not by default)

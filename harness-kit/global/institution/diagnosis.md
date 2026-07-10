@@ -63,16 +63,18 @@ Fix: every lesson or decision worth keeping goes to `institution\lessons.md`
 `~/.codex/config.toml` has `approval_policy = "on-failure"`, which Codex marks
 DEPRECATED (commands run first, ask on failure).
 Fix: ask the user before changing config; recommended value is `on-request`.
-Until changed, prefer `codex exec` with narrow prompts for anything risky.
+Until changed, prefer `codex.cmd exec` with narrow prompts for anything risky.
 
-### X3. Config defaults to the most expensive settings
-`~/.codex/config.toml` sets `model = "gpt-5.5"` (top tier) plus
+### X3. Worker sessions inherit the commander model
+`~/.codex/config.toml` selects a GPT-5.6 variant (currently `gpt-5.6-terra`;
+commander/top) plus
 `model_reasoning_effort = "high"` and `plan_mode_reasoning_effort = "high"` —
-every session started without flags pays top rates even for trivial work.
-Fix: always pass the model explicitly — `-m gpt-5.4-mini` for bulk/simple,
-`-m gpt-5.4` for normal work. Optionally lower effort with
-`-c model_reasoning_effort="medium"` (未實測 — only "high" is verified on this
-install; if "medium" errors, drop the flag and rely on the cheaper model).
+correct for the user-facing commander, but wasteful when inherited by routine
+worker sessions.
+Fix: keep the default for the commander. Every separate worker session passes
+`-m gpt-5.5` explicitly, plus `-c model_reasoning_effort="low"` for scans/batch
+or `"medium"`/`"high"` for implementation. Use the configured GPT-5.6 variant
+only for the main thread, hard synthesis, high-stakes judgment, or escalation.
 
 ## Hermes specific
 

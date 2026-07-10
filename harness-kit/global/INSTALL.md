@@ -56,7 +56,7 @@ Templates are in `<KIT>\global\indexes\`.
    `<!-- 中文摘要` comment (proves no encoding corruption).
 3. Codex load test (skip and mark N/A in the report if Codex CLI is not
    installed on this machine): run
-   `codex exec -m gpt-5.4-mini "Reply ONLY with the absolute paths of instruction files loaded into your context, or NONE."`
+   `codex.cmd exec -m gpt-5.5 -c model_reasoning_effort="low" "Reply ONLY with the absolute paths of instruction files loaded into your context, or NONE."`
    If the global AGENTS.md is NOT in the answer, record that in
    `<HOME>\.agents\institution\lessons.md` — project-level AGENTS.md (via
    project-template\APPLY.md) then becomes mandatory for Codex on this machine.

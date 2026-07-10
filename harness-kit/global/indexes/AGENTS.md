@@ -17,10 +17,11 @@ instruction/memory files).
 - Multi-agent hard stop: do not spawn subagents unless the user explicitly asks
   for subagents, delegation, or parallel agent work. If spawning is authorized,
   show the agent plan table (task / model / effort / reason) before running.
-- Cheap delegation: `codex exec -m <cheap model> "<task brief>"` in a separate
-  session. Task briefs use templates.md forms.
-- COST WARNING: if config.toml pins an expensive default model or high
-  reasoning effort, always pass `-m` explicitly (diagnosis.md X3).
+- Worker delegation: `codex.cmd exec -m <worker model> -c
+  model_reasoning_effort="<effort>" "<task brief>"` in a separate session.
+  Task briefs use templates.md forms.
+- COST WARNING: if config.toml pins the commander model or high reasoning effort,
+  worker sessions must pass `-m` and effort explicitly (diagnosis.md X3).
 - No persistent memory on this harness — anything worth keeping goes to
   institution `lessons.md` before session end (diagnosis.md X1, maintenance.md §2).
 - Do not change `~/.codex/config.toml` without asking the user

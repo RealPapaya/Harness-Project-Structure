@@ -2,9 +2,9 @@
 <!-- 中文摘要：共用正本的目錄地圖。三個 harness 的薄索引都路由到這裡。
      Last updated 行由每次修改正本的 session 更新。 -->
 
-Last updated: 2026-07-07 (added planning-playbook.md — the project-agnostic
-decision-maker loop for turning a request into a buildable plan; its worked
-instances are the PLAN files each project keeps in its own repo)
+Last updated: 2026-07-10 (Codex dispatch upgraded to the verified
+GPT-5.6-family commander + `gpt-5.5` worker model; GPT-5.4 retired; Claude added
+as the preferred adversarial cross-family reviewer for GPT-produced work)
 
 This directory is the single source of truth for how AI agents work for Morris
 across Claude Code, Codex CLI, and Hermes. Harness instruction files are thin

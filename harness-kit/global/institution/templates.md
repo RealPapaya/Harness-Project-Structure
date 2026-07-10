@@ -67,10 +67,13 @@ REPORT: findings list sorted by severity, max 30 lines (overflow to file).
 - **Claude Code**: Agent tool; template text as the prompt; set `model:` per the
   tier table (T1 cheap; T2/T3 mid; T4 cheap-to-mid; T5 mid, or top for high-stakes).
   Parallel Agent calls are fine for independent briefs.
-- **Codex CLI**: `codex exec -m {gpt-5.4-mini|gpt-5.4} "<entire filled template>"`.
+- **Codex CLI**: worker session = `codex.cmd exec -m gpt-5.5 -c
+  model_reasoning_effort="{low|medium|high}" "<entire filled template>"`.
+  Reserve the config-selected GPT-5.6 variant for the commander, hard synthesis,
+  and escalation.
   Non-interactive — double-check the brief is self-contained. Add
   `-C {project dir}` to set the working root. For a second-opinion review (T5),
-  Codex on a Claude-produced plan/diff is the preferred cross-family pattern.
+  use Claude on GPT-produced work, or Codex on Claude-produced work.
 - **Hermes**: `delegate_task` with the filled template (max 3 concurrent), or an
   ordinary session pasted with the template. Confirm the model tier first —
   default is paid opus (dispatch.md §2).
